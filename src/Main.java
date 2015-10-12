@@ -15,7 +15,7 @@ public class Main
     public static void main(String[] args) throws Exception {
         // Parse parameters
         boolean lCreateServer = false;
-        String lLoadFilename = "FlatlandExampleEmissions.in";
+        String lLoadFilename = "SouthEmissions.in";
 
         for (int i = 0; i < args.length; ++i) {
             String param = args[i];

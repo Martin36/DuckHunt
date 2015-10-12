@@ -45,18 +45,7 @@ public class HMM {
     	rowSumA = 0;
 
     }
-    //Since the states are the same as the observations
-    //the B matrix will be the identity matrix
-    for(int i = 0; i < numberOfStates; ++i){
-    	for(int j = 0; j < numberOfEmissions; ++j){
-    		if(i == j){
-    			B[i][j] = 1;
-    		}else{
-    			B[i][j] = 0;
-    		}
-    	}
-    }
-/*    
+    
     // Initialize B as 1/M + random noise
     for (int i = 0; i < numberOfStates; ++i) {
     	for (int j = 0; j < numberOfEmissions; ++j) {
@@ -68,7 +57,7 @@ public class HMM {
         }
     	rowSumB = 0;
     }
-*/    
+    
     // Initialize pi as 1/N + random noise
     double sumPi = 0;
     for (int i = 0; i < numberOfStates; ++i) {

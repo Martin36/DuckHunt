@@ -1,7 +1,6 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.util.Random;
 
 class Player {
 		HMM hmm;
@@ -63,7 +62,7 @@ class Player {
     	//First we calculate how many birds at each position
     	for(int i = 0; i < noBirds; i++){
     		lastMoves[i] = pState.getBird(i).getLastObservation();
-    		currentStateDist[lastMoves[i]-3] += 1;
+    		currentStateDist[lastMoves[i]] += 1;
     	}
     	//Then we make the list to hold the probability
     	//of a bird being in position i
@@ -90,11 +89,9 @@ class Player {
     	for(int i = 0; i < noBirds; i++){
     		//First we make the emission sequence
     		int [] emiSeq = new int[2];
-    		emiSeq[0] = pState.getBird(i).getLastObservation()-3;
+    		emiSeq[0] = pState.getBird(i).getLastObservation();
     		emiSeq[1] = nextMove;
-    		//Fel här
     		emiSeqProb[i] = hmm.estimateProbabilityOfEmissionSequence(emiSeq);
-    		//emiSeqProb[i] = hmm.estimateProbabilityOfEmissionSequence(observations[0]);
     	}
     	//We need to find the maximized sequence probability
     	double maxProb = 0;
@@ -108,14 +105,29 @@ class Player {
     	}
     	//There has to be a limit of probability so
     	//we don't shoot if the probability ain't high enough
-    	double minProb = 0.6;
+    	double minProb = 0.7;
     	if(maxProb >= minProb){
     		return new Action(birdIndex,nextMove);
-//    	Random rand = new Random();
-//    	return new Action(birdIndex, rand.nextInt(2));
-    	 	}
+    	}
     	
-		
+/*    	FileWriter fr = null;
+    	try {
+			fr = new FileWriter(new File("observations.txt"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	int o;
+    	//Writes down all observations in a file.
+    	for(int i = 0; i < pState.getNumBirds(); i++){
+        	o = pState.getBird(i).getLastObservation();
+        	try {
+				fr.write(o);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    		
+    	}
+*/		
         // This line chooses not to shoot.
         return cDontShoot;
 

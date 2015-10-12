@@ -19,6 +19,12 @@ class Client {
         mInputStream = pInputStream;
         mOutputStream = pOutputStream;
         mState = null;
+      	try {
+      		System.setIn(new FileInputStream("C:/Users/jonas/Documents/DuckHunt/bin/server2client.txt"));
+      		System.setOut(new PrintStream("C:/Users/jonas/Documents/DuckHunt/bin/client2server.txt"));
+      	}catch (FileNotFoundException e) {
+  				e.printStackTrace();
+  			}
     }
 
     /**

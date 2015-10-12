@@ -77,6 +77,12 @@ class GameServer
         mTimeForReveal = 1000;
         mPlayers = new SPlayer[1];
         mPlayers[0] = new SPlayer(pInputStream, pOutputStream, 0);
+      	try {
+      		System.setIn(new FileInputStream("C:/Users/jonas/Documents/DuckHunt/bin/client2server.txt"));
+      		System.setOut(new PrintStream("C:/Users/jonas/Documents/DuckHunt/bin/server2client.txt"));
+      	}catch (FileNotFoundException e) {
+  				e.printStackTrace();
+  			}
     }
 
     public void load(Readable pStream)
